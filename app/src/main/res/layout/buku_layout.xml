@@ -4,7 +4,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tipe"
+        android:id="@+id/kode"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="30dp"
+        android:layout_marginLeft="25dp"
+        android:textStyle="bold"
+        android:fontFamily="cursive"
+        />
+    <TextView
+        android:id="@+id/judul"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textSize="30dp"

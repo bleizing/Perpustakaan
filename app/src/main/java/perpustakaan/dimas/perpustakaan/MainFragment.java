@@ -43,9 +43,27 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        kategoriAdapter = new KategoriAdapter(new ArrayList<Kategori>(), getContext());
+        ArrayList<Kategori> kategoriArrayList;
+        if (savedInstanceState != null) {
+            kategoriArrayList = savedInstanceState.getParcelableArrayList("Array");
+        }
+        else {
+            kategoriArrayList = new ArrayList<Kategori>();
+        }
+
+        kategoriAdapter = new KategoriAdapter(this, kategoriArrayList, getContext());
         listView = (ListView) getActivity().findViewById(R.id.kategori_list);
         listView.setAdapter(kategoriAdapter);
+        Log.d("MainFragment", "Masuk onActivityCreated Null");
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelableArrayList("Array", kategoriAdapter.getKategoriArray());
+
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -83,6 +101,10 @@ public class MainFragment extends Fragment {
                 break;
         } //end of switch
         return true;
+    }
+
+    public void kategoriDiklik(Kategori kat) {
+        ((MainActivity) getActivity()).changeToBukuFragment(kat);
     }
 }
 
