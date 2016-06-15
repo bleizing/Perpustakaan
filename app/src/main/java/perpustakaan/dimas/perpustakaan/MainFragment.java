@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
 
-
     private ListView listView;
     private KategoriAdapter kategoriAdapter;
 
@@ -43,15 +42,7 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<Kategori> kategoriArrayList;
-        if (savedInstanceState != null) {
-            kategoriArrayList = savedInstanceState.getParcelableArrayList("Array");
-        }
-        else {
-            kategoriArrayList = new ArrayList<Kategori>();
-        }
-
-        kategoriAdapter = new KategoriAdapter(this, kategoriArrayList, getContext());
+        kategoriAdapter = new KategoriAdapter(this, Model.getKategoriArrayList(), getContext());
         listView = (ListView) getActivity().findViewById(R.id.kategori_list);
         listView.setAdapter(kategoriAdapter);
         Log.d("MainFragment", "Masuk onActivityCreated Null");
@@ -76,8 +67,8 @@ public class MainFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_add :
                 final AlertDialog.Builder inputAlert = new AlertDialog.Builder(getContext());
-                inputAlert.setTitle("Title of the Input Box");
-                inputAlert.setMessage("We need your name to proceed");
+                inputAlert.setTitle("Input Kategori");
+                inputAlert.setMessage("Masukkan Jenis Kategori");
                 final EditText userInput = new EditText(getContext());
                 inputAlert.setView(userInput);
                 inputAlert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
@@ -85,7 +76,7 @@ public class MainFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String userInputValue = userInput.getText().toString();
                         Kategori kat = new Kategori(userInputValue);
-                        kategoriAdapter.getKategoriArray().add(kat);
+                        Model.addKategoriArrayList(kat);
                         kategoriAdapter.notifyDataSetChanged();
                         Log.d("Kategori Array", String.valueOf(kategoriAdapter.getKategoriArray().size()));
                     }
@@ -104,7 +95,7 @@ public class MainFragment extends Fragment {
     }
 
     public void kategoriDiklik(Kategori kat) {
-        ((MainActivity) getActivity()).changeToBukuFragment(kat);
+        ((MainActivity) getActivity()).changeToKategoriFragment(kat);
     }
 }
 

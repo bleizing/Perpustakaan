@@ -45,15 +45,7 @@ public class KategoriFragment extends Fragment {
         Bundle args = getArguments();
         kat = args.getParcelable("Kategori");
 
-        ArrayList<Buku> bukuArrayList;
-        if (savedInstanceState != null) {
-            bukuArrayList = savedInstanceState.getParcelableArrayList("Array");
-        }
-        else {
-            bukuArrayList = new ArrayList<Buku>();
-        }
-
-        bukuAdapter = new BukuAdapter(this, bukuArrayList, getContext());
+        bukuAdapter = new BukuAdapter(this, kat.getBukuArrayList(), getContext());
         listView = (ListView) getActivity().findViewById(R.id.buku_list);
         listView.setAdapter(bukuAdapter);
         Log.d("KategoriFragment", "Masuk onActivityCreated Null");
@@ -67,7 +59,7 @@ public class KategoriFragment extends Fragment {
 
     }
     public void bukuDiKlik(Buku buku) {
-
+        ((MainActivity) getActivity()).changeToBukuFragment(buku);
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -80,8 +72,8 @@ public class KategoriFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_add :
                 final AlertDialog.Builder inputAlert = new AlertDialog.Builder(getContext());
-                inputAlert.setTitle("Title of the Input Box");
-                inputAlert.setMessage("We need your name to proceed");
+                inputAlert.setTitle("Input Buku");
+                inputAlert.setMessage("Masukkan Kode dan Judul Buku");
 
                 LinearLayout layout = new LinearLayout(getContext());
                 layout.setOrientation(LinearLayout.VERTICAL);
@@ -99,7 +91,7 @@ public class KategoriFragment extends Fragment {
                         Buku buku = new Buku(judul,kode,kat);
                         bukuAdapter.getBukuArray().add(buku);
                         bukuAdapter.notifyDataSetChanged();
-                        Log.d("Kategori Array", String.valueOf(bukuAdapter.getBukuArray().size()));
+                        Log.d("Buku Array", String.valueOf(bukuAdapter.getBukuArray().size()));
                     }
                 });
                 inputAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

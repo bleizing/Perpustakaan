@@ -24,8 +24,8 @@ public class Kategori implements Parcelable {
         return tipe;
     }
 
-    public void simpanBuku(Buku b) {
-        list.add(b);
+    public ArrayList<Buku> getBukuArrayList() {
+        return list;
     }
 
     @Override

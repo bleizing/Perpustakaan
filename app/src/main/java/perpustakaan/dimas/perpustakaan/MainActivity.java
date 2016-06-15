@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void changeToBukuFragment(Kategori kat) {
+    public void changeToKategoriFragment(Kategori kat) {
         KategoriFragment kategoriFragment = new KategoriFragment();
         Bundle args = new Bundle();
         args.putParcelable("Kategori", kat);
@@ -38,6 +38,18 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, kategoriFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void changeToBukuFragment(Buku b) {
+        BukuFragment bukuFragment = new BukuFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("Buku", b);
+        bukuFragment.setArguments(args);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, bukuFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

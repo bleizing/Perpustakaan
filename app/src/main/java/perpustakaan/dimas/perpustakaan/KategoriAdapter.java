@@ -66,4 +66,10 @@ public class KategoriAdapter extends BaseAdapter {
     public ArrayList<Kategori> getKategoriArray() {
         return kategoriArray;
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        kategoriArray = Model.getKategoriArrayList();
+        super.notifyDataSetChanged();
+    }
 }
