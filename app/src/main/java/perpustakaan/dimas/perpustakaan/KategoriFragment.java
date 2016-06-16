@@ -61,7 +61,9 @@ public class KategoriFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putParcelableArrayList("Array", bukuAdapter.getBukuArray());
+        if (bukuAdapter != null) {
+            outState.putParcelableArrayList("Array", bukuAdapter.getBukuArray());
+        }
 
     }
     public void bukuDiKlik(Buku buku) {
