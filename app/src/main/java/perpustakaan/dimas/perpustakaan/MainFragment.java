@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
 
+
     private ListView listView;
     private KategoriAdapter kategoriAdapter;
 
@@ -41,6 +42,7 @@ public class MainFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((MainActivity) getActivity()).setActionBarTitle("Perpustakaan");
 
         kategoriAdapter = new KategoriAdapter(this, Model.getKategoriArrayList(), getContext());
         listView = (ListView) getActivity().findViewById(R.id.kategori_list);
@@ -52,10 +54,16 @@ public class MainFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.d("MainFragment", "onSaveInstanceState");
+        if (kategoriAdapter != null) {
+            outState.putParcelableArrayList("Array", kategoriAdapter.getKategoriArray());
 
-        outState.putParcelableArrayList("Array", kategoriAdapter.getKategoriArray());
+        }
 
     }
+
+
+
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -98,5 +106,3 @@ public class MainFragment extends Fragment {
         ((MainActivity) getActivity()).changeToKategoriFragment(kat);
     }
 }
-
-

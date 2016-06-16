@@ -12,9 +12,11 @@ import android.widget.TextView;
 
 
 public class BukuFragment extends Fragment {
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MainActivity) getActivity()).setActionBarTitle("Buku");
     }
 
     @Override
