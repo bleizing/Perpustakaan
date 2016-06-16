@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public void changeToKategoriFragment(Kategori kat) {
         KategoriFragment kategoriFragment = new KategoriFragment();
         Bundle args = new Bundle();
-        args.putParcelable("Kategori", kat);
+        args.putParcelable("KategoriParcelable", kat);
         kategoriFragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
