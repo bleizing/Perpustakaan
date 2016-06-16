@@ -36,7 +36,7 @@ public class BukuFragment extends Fragment {
         TextView judul = (TextView) getActivity().findViewById(R.id.judul);
 
         kode.setText("Kode : " + buku.getKode());
-        kategori.setText("Kateogri : " + buku.getKategori().getTipe());
+        kategori.setText("Kategori : " + buku.getKategori().getTipe());
         judul.setText("Judul : " + buku.getJudul());
     }
 }

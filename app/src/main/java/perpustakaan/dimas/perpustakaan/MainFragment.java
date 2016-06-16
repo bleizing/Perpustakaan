@@ -79,6 +79,7 @@ public class MainFragment extends Fragment {
                 inputAlert.setMessage("Masukkan Jenis Kategori");
                 final EditText userInput = new EditText(getContext());
                 inputAlert.setView(userInput);
+                userInput.setHint("Kategori Buku");
                 inputAlert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

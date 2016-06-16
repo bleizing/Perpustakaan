@@ -6,10 +6,11 @@
     <TextView
         android:id="@+id/tipe"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:textStyle="bold"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-condensed"
         />
 </LinearLayout>

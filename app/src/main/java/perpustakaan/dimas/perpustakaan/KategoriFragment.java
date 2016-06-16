@@ -88,8 +88,10 @@ public class KategoriFragment extends Fragment {
 
                 final EditText userInput = new EditText(getContext());
                 layout.addView(userInput);
+                userInput.setHint("Kode Buku");
                 final EditText userInput2 = new EditText((getContext()));
                 layout.addView(userInput2);
+                userInput2.setHint("Judul Buku");
                 inputAlert.setView(layout);
                 inputAlert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
