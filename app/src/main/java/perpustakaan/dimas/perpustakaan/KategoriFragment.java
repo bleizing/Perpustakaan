@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,13 +25,17 @@ import java.util.ArrayList;
 ;
 public class KategoriFragment extends Fragment {
 
+
+
     private BukuAdapter bukuAdapter;
     private ListView listView;
     private Kategori kat;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -44,6 +49,7 @@ public class KategoriFragment extends Fragment {
 
         Bundle args = getArguments();
         kat = args.getParcelable("Kategori");
+        ((MainActivity) getActivity()).setActionBarTitle(kat.getTipe());
 
         bukuAdapter = new BukuAdapter(this, kat.getBukuArrayList(), getContext());
         listView = (ListView) getActivity().findViewById(R.id.buku_list);

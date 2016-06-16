@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
 
+
     private ListView listView;
     private KategoriAdapter kategoriAdapter;
 
@@ -41,6 +42,7 @@ public class MainFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((MainActivity) getActivity()).setActionBarTitle("Perpustakaan");
 
         kategoriAdapter = new KategoriAdapter(this, Model.getKategoriArrayList(), getContext());
         listView = (ListView) getActivity().findViewById(R.id.kategori_list);
