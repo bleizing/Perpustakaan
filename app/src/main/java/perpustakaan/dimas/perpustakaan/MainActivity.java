@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public void changeToKategoriFragment(Kategori kat) {
         KategoriFragment kategoriFragment = new KategoriFragment();
         Bundle args = new Bundle();
-        args.putParcelable("KategoriParcelable", kat);
+        args.putParcelable("Kategori", kat);
         kategoriFragment.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
