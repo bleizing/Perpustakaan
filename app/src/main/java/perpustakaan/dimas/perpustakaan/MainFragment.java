@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
 
+    private LayoutInflater inflater;
 
     private ListView listView;
     private KategoriAdapter kategoriAdapter;
@@ -32,6 +35,7 @@ public class MainFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        inflater = getLayoutInflater(savedInstanceState);
     }
 
     @Override
@@ -77,8 +81,9 @@ public class MainFragment extends Fragment {
                 final AlertDialog.Builder inputAlert = new AlertDialog.Builder(getContext());
                 inputAlert.setTitle("Input Kategori");
                 inputAlert.setMessage("Masukkan Jenis Kategori");
-                final EditText userInput = new EditText(getContext());
-                inputAlert.setView(userInput);
+                final LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_edit_text, null);
+                final EditText userInput = (EditText) layout.findViewById(R.id.edit_text);
+                inputAlert.setView(layout);
                 userInput.setHint("Kategori Buku");
                 inputAlert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
