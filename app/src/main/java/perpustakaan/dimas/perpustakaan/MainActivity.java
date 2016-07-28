@@ -1,27 +1,30 @@
 package perpustakaan.dimas.perpustakaan;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.provider.SyncStateContract;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
+    public static final String TAG = "MainActivity";
+
+    /***********************************************************************************************
+     *
+     *          ACTIVITY LIFECYCLE
+     *
+     **********************************************************************************************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.i(TAG, "onCreate()");
+
         setContentView(R.layout.activity_main);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
@@ -32,14 +35,108 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         }
     }
 
+    /*
+        Only called if activity was stopped previously by onStop()
+     */
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart()");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart()");
+    }
+
+    /*
+        Only called after a configuration change happened (screen rotation)
+        OR after app process was killed due to out of memory
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.i(TAG, "onRestoreInstanceState()");
+        int options = savedInstanceState.getInt("ActionBar");
+
+        final boolean isShowHomeEnabled = (options & ActionBar.DISPLAY_SHOW_HOME) != 0;
+        final boolean isHomeAsUpEnabled = (options & ActionBar.DISPLAY_HOME_AS_UP) != 0;
+        final boolean isShowTitleEnabled = (options & ActionBar.DISPLAY_SHOW_TITLE) != 0;
+        final boolean isUseLogoEnabled = (options & ActionBar.DISPLAY_USE_LOGO) != 0;
+        final boolean isShowCustomEnabled = (options & ActionBar.DISPLAY_SHOW_CUSTOM) != 0;
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayShowHomeEnabled(isShowHomeEnabled);
+        ab.setDisplayHomeAsUpEnabled(isHomeAsUpEnabled);
+        ab.setDisplayShowTitleEnabled(isShowTitleEnabled);
+        ab.setDisplayUseLogoEnabled(isUseLogoEnabled);
+        ab.setDisplayShowCustomEnabled(isShowCustomEnabled);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume()");
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.i(TAG, "onCreateOptionsMenu()");
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        Log.i(TAG, "onPrepareOptionsMenu()");
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    /** ================================
+     *      ACTIVITY IS ACTIVE
+     * ================================*/
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause()");
+    }
+
+    /*
+        Called every time before onStop() is called
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG, "onSaveInstanceState()");
+        outState.putInt("ActionBar", getSupportActionBar().getDisplayOptions());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop()");
+    }
+
+    /*
+       WARNING: not guaranteed to be called
+                do all data saving and resource releases in onStop()
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy()");
+    }
+
+    /***********************************************************************************************
+     *
+     *      END ACTIVITY LIFECYCLE
+     *
+     **********************************************************************************************/
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("MainACtivity", "onOptionsItemSelected");
+        Log.i(TAG, "onOptionsItemSelected()");
         switch (item.getItemId()) {
             case android.R.id.home:
                 FragmentManager fm = getSupportFragmentManager();
@@ -82,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     @Override
     public void onBackStackChanged() {
-        Log.d("MainActivity", "Back stack number: " + getSupportFragmentManager().getBackStackEntryCount());
+        Log.i(TAG, "onBackStackChanged()");
         shouldDisplayHomeUp();
     }
 
@@ -93,31 +190,9 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     }
 
     public boolean onSupportNavigateUp() {
-        Log.d("MainActivity", "Up!");
+        Log.i(TAG, "onSupportNavigateUp()");
         getSupportFragmentManager().popBackStack();
         return true;
-    }
-
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("ActionBar", getSupportActionBar().getDisplayOptions());
-    }
-    protected void onRestoreInstanceState (Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        int options = savedInstanceState.getInt("ActionBar");
-
-        final boolean isShowHomeEnabled = (options & ActionBar.DISPLAY_SHOW_HOME) != 0;
-        final boolean isHomeAsUpEnabled = (options & ActionBar.DISPLAY_HOME_AS_UP) != 0;
-        final boolean isShowTitleEnabled = (options & ActionBar.DISPLAY_SHOW_TITLE) != 0;
-        final boolean isUseLogoEnabled = (options & ActionBar.DISPLAY_USE_LOGO) != 0;
-        final boolean isShowCustomEnabled = (options & ActionBar.DISPLAY_SHOW_CUSTOM) != 0;
-
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayShowHomeEnabled(isShowHomeEnabled);
-        ab.setDisplayHomeAsUpEnabled(isHomeAsUpEnabled);
-        ab.setDisplayShowTitleEnabled(isShowTitleEnabled);
-        ab.setDisplayUseLogoEnabled(isUseLogoEnabled);
-        ab.setDisplayShowCustomEnabled(isShowCustomEnabled);
     }
 }
 
