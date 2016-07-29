@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     /*
         Called every time before onStop() is called
+        EXCEPT when user presses the back button
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
